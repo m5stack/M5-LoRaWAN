@@ -6,7 +6,7 @@ Contains M5Stack-**UNIT LoRaWAN** series related case programs. The hardware is 
 
 ## Related Link
 
-[Docment & AT Command](https://docs.m5stack.com/en/unit/lorawan868)
+[Document & AT Command](https://docs.m5stack.com/en/unit/lorawan868)
 
 ## License
 
