@@ -1,5 +1,5 @@
 {
-  "name": "UNIT_LoRaWAN",
+  "name": "M5-LoRaWAN",
   "description": "Library for UNIT LoRaWAN",
   "keywords": "M5Stack Unit LoRaWAN",
   "authors": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/m5stack/UNIT_LoRaWAN.git"
+    "url": "https://github.com/m5stack/M5-LoRaWAN.git"
   },
   "version": "0.0.1",
   "frameworks": "arduino",

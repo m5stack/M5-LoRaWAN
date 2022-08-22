@@ -1,7 +1,7 @@
-#include "UNIT_LoRaWAN.h"
+#include "M5_LoRaWAN.h"
 #include "M5Stack.h"
 
-UNIT_LoRaWAN LoRaWAN;
+M5_LoRaWAN LoRaWAN;
 String response;
 
 void setup() {
@@ -89,7 +89,6 @@ void setup() {
         delay(100);
     };
     Serial.println("Join success.....");
-
 }
 
 void loop() {
