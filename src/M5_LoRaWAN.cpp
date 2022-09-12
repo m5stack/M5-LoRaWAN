@@ -3,7 +3,7 @@
 /*! @brief Initialize the LoRaWAN.
  *  @param RX Receiving ports.
  *  @param TX Sending ports. */
-void M5_LoRaWAN::Init(HardwareSerial *serial, uint8_t RX, uint8_t TX) {
+void M5_LoRaWAN::Init(HardwareSerial* serial, uint8_t RX, uint8_t TX) {
     _serial = serial;
     _serial->begin(115200, SERIAL_8N1, RX, TX);
     _serial->flush();
@@ -65,10 +65,10 @@ void M5_LoRaWAN::writeCMD(String command) {
 }
 
 /*! @brief Send a message */
-void M5_LoRaWAN::sendMsg(uint8_t confirm, uint8_t nbtrials, size_t length,
-                         String data) {
+void M5_LoRaWAN::sendMsg(uint8_t confirm, uint8_t nbtrials, String data) {
+    String encodedData = encodeMsg(data);
     String cmd = "AT+DTRX=" + String(confirm) + ',' + String(nbtrials) + ',' +
-                 String(length) + ',' + data + "\r\n";
+                 String(encodedData.length()) + ',' + encodedData + "\r\n";
     writeCMD(cmd);
 }
 
@@ -78,7 +78,7 @@ String M5_LoRaWAN::receiveMsg() {
     String restr = waitMsg(2000);
     if (restr.indexOf("OK+RECV:") != -1 && restr.indexOf("02,00,00") == -1) {
         String data = restr.substring(restr.indexOf("OK+RECV:") + 17, -2);
-        return data;
+        return decodeMsg(data);
     } else {
         return "";
     }
@@ -137,4 +137,37 @@ void M5_LoRaWAN::setFreqMask(String mask) {
 /*! @brief Join the Node */
 void M5_LoRaWAN::startJoin() {
     writeCMD("AT+CJOIN=1,0,10,8\r\n");
+}
+
+/*! @brief Encode the to hex string the message to be sent
+ *  @param str String formatted message to be sent */
+String M5_LoRaWAN::encodeMsg(String str) {
+    char buf[str.length() + 1];
+    char tempbuf[((str.length() + 1) * 2)];
+    str.toCharArray(buf, str.length() + 1);
+    int i = 0;
+    for (const char* p = buf; *p; ++p) {
+        sprintf((char*)(tempbuf + i), "%02x", *p);
+        i += 2;
+    }
+    return String(tempbuf);
+}
+
+/*! @brief Decode the received hex string to a string
+ *  @param hexEncoded received hex string */
+String M5_LoRaWAN::decodeMsg(String hexEncoded) {
+    if (hexEncoded.length() % 2) {
+        char buf[hexEncoded.length() + 1];
+        char tempbuf[((hexEncoded.length() + 1))];
+        hexEncoded.toCharArray(buf, hexEncoded.length() + 1);
+        int i = 0;
+        for (int loop = 2; loop < hexEncoded.length() + 1; loop += 2) {
+            String tmpstr = hexEncoded.substring(loop - 2, loop);
+            sprintf(&tempbuf[i], "%c", strtoul(tmpstr.c_str(), nullptr, 16));
+            i++;
+        }
+        return String(tempbuf);
+    } else {
+        return hexEncoded;
+    }
 }

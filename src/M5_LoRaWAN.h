@@ -9,6 +9,7 @@
  */
 #ifndef _M5_LORAWAN_H_
 #define _M5_LORAWAN_H_
+#endif
 
 #include <Arduino.h>
 #include "pins_arduino.h"
@@ -16,6 +17,8 @@
 class M5_LoRaWAN {
    private:
     HardwareSerial *_serial;
+    String encodeMsg(String ret);
+    String decodeMsg(String ret);
 
    public:
     void Init(HardwareSerial *serial = &Serial2, uint8_t RX = 16,
@@ -32,7 +35,7 @@ class M5_LoRaWAN {
     void setRxWindow(String freq);
     void setFreqMask(String mask);
     void startJoin();
-    void sendMsg(uint8_t confirm, uint8_t nbtrials, size_t length, String data);
+    void sendMsg(uint8_t confirm, uint8_t nbtrials, String data);
     String receiveMsg();
 };
 
