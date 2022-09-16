@@ -156,7 +156,7 @@ String M5_LoRaWAN::encodeMsg(String str) {
 /*! @brief Decode the received hex string to a string
  *  @param hexEncoded received hex string */
 String M5_LoRaWAN::decodeMsg(String hexEncoded) {
-    if (hexEncoded.length() % 2) {
+    if ((hexEncoded.length() & 1) == 0) {
         char buf[hexEncoded.length() + 1];
         char tempbuf[((hexEncoded.length() + 1))];
         hexEncoded.toCharArray(buf, hexEncoded.length() + 1);

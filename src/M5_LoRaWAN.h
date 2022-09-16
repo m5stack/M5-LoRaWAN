@@ -9,7 +9,6 @@
  */
 #ifndef _M5_LORAWAN_H_
 #define _M5_LORAWAN_H_
-#endif
 
 #include <Arduino.h>
 #include "pins_arduino.h"
