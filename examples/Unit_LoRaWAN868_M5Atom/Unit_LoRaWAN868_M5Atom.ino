@@ -132,7 +132,7 @@ void loop() {
 
     if (system_fsm == kSending) {
         Serial.println("LoraWan Sending");
-        LoRaWAN.writeCMD("AT+DTRX=1,8,8,4655434b20535443\r\n");
+        LoRaWAN.writeCMD("AT+DTRX=1,8,8,4c4f5645204d35\r\n");
         system_fsm = kWaitSend;
     }
     delay(10);
