@@ -44,17 +44,18 @@ bool M5_LoRaWAN::checkJoinStatus() {
  *  @param time Waiting time (milliseconds)
  *  @return Received messages */
 String M5_LoRaWAN::waitMsg(unsigned long time) {
-    String restr;
-    unsigned long start = millis();
-    while (1) {
-        if (_serial->available() || (millis() - start) < time) {
-            String str = _serial->readString();
-            restr += str;
-        } else {
-            break;
-        }
+  unsigned long start = millis();
+  String str;
+  while (1) {
+    if ((millis() - start) > time) {
+      start = millis();
+      String cmd = "AT+DRX=?\r\n";
+      writeCMD(cmd);
+      str = _serial->readString();
+      break;
     }
-    return restr;
+  }
+  return str;
 }
 
 /*! @brief Send an AT command
