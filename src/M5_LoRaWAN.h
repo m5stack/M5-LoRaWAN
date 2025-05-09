@@ -26,7 +26,7 @@ class M5_LoRaWAN {
     bool checkDeviceConnect();
     bool checkJoinStatus();
     void writeCMD(String command);
-    void configOTTA(String device_eui, String app_eui, String app_key,
+    void configOTAA(String device_eui, String app_eui, String app_key,
                     String ul_dl_mode);
     void configABP(String device_addr, String app_skey, String net_skey,
                    String ul_dl_mode);

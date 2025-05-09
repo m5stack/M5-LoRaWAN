@@ -22,7 +22,7 @@ void setup() {
     while (!LoRaWAN.checkDeviceConnect())
         ;
     Serial.println("Module Config...");
-    LoRaWAN.configOTTA("00bb9da5b97addf1",                  // Device EUI
+    LoRaWAN.configOTAA("00bb9da5b97addf1",                  // Device EUI
                        "0000000000000000",                  // APP EUI
                        "27dfe264ca33ac1957c005eb48ba4721",  // APP KEY
                        "2"  // Upload Download Mode

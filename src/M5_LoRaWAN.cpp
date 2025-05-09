@@ -90,7 +90,7 @@ String M5_LoRaWAN::receiveMsg() {
  *  @param app_key Node AppKey
  *  @param ul_dl_mode Setting the upstream and downstream co-channel 1:
  * Co-channel mode 2: Co-channel mode */
-void M5_LoRaWAN::configOTTA(String device_eui, String app_eui, String app_key,
+void M5_LoRaWAN::configOTAA(String device_eui, String app_eui, String app_key,
                             String ul_dl_mode) {
     writeCMD("AT+CJOINMODE=0\r\n");
     writeCMD("AT+CDEVEUI=" + device_eui + "\r\n");
