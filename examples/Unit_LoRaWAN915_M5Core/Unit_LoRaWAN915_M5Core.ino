@@ -51,7 +51,7 @@ void setup() {
 
     Serial.println("LoraWan config");
     // Set Join Mode OTAA.
-    LoRaWAN.configOTTA("d896e0ff00000240",                  // Device EUI
+    LoRaWAN.configOTAA("d896e0ff00000240",                  // Device EUI
                        "0000000000000001",                  // APP EUI
                        "98929b92f09e2daf676d646d0f61d250",  // APP KEY
                        "2"  // Upload Download Mode
